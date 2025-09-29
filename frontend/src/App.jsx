@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
+import RequestAssessment from "./pages/RequestAssessment";
+import AssessmentResults from "./pages/AssessmentResults";
+import BookingQueue from "./pages/BookingQueue";
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+import SignupForm from "./pages/SignupForm";
+import HIPAACompliance from "./components/HIPAACompliance";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState("dashboard");
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "dashboard":
+        return <Dashboard />;
+      case "request-assessment":
+        return <RequestAssessment />;
+      case "assessment-results":
+        return <AssessmentResults />;
+      case "booking-queue":
+        return <BookingQueue />;
+      case "settings":
+        return <Settings />;
+      default:
+        return <Dashboard />;
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupForm />} />
+          
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={
+            <div className="pt-8">
+              <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+                {renderPage()}
+              </Layout>
+            </div>
+          } />
+          
+          {/* Default redirect to login */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
+  
