@@ -170,7 +170,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 mt-6">
       <DashboardOverview />
 
       {/* Key Action Cards */}

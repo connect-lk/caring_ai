@@ -1,16 +1,20 @@
+import { FiLogOut } from "react-icons/fi";
+import { useLocation, Link } from "react-router-dom"; // ✅ import navigate
+
 const Sidebar = ({
   isCollapsed,
   onToggle,
-  currentPage,
-  onPageChange,
   isMobile,
   isMobileMenuOpen,
   onCloseMobileMenu,
 }) => {
+  const location = useLocation();
+
   const navigationItems = [
     {
       id: "dashboard",
       name: "Dashboard",
+      path: "/dashboard",
       icon: (
         <svg
           className="h-5 w-5"
@@ -36,6 +40,7 @@ const Sidebar = ({
     {
       id: "request-assessment",
       name: "Request Assessment",
+      path: "/request-assessment",
       icon: (
         <svg
           className="h-5 w-5"
@@ -55,6 +60,7 @@ const Sidebar = ({
     {
       id: "assessment-results",
       name: "Assessment Results",
+      path: "/assessment-results",
       icon: (
         <svg
           className="h-5 w-5"
@@ -74,6 +80,7 @@ const Sidebar = ({
     {
       id: "booking-queue",
       name: "Booking Queue",
+      path: "/booking-queue",
       icon: (
         <svg
           className="h-5 w-5"
@@ -93,6 +100,7 @@ const Sidebar = ({
     {
       id: "settings",
       name: "Settings",
+      path: "/settings",
       icon: (
         <svg
           className="h-5 w-5"
@@ -120,25 +128,23 @@ const Sidebar = ({
   return (
     <div
       className={`
-    fixed left-0 top-0 z-50 h-full bg-[#082f49]  
+     fixed left-0 top-0 z-50 h-full bg-[#233242]
     flex flex-col justify-between
-    transition-all duration-300 ease-in-out
+    ease-in-out duration-300 overflow-visible
     ${
       isMobile
-        ? isMobileMenuOpen
-          ? "w-64 translate-x-0"
-          : "-translate-x-full"
-        : isCollapsed
-        ? "w-16"
-        : "w-64"
+        ? `w-64 transform transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`
+        : `transition-all duration-300 ${isCollapsed ? "w-16" : "w-64"}`
     }
   `}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4.5 border-b border-[#082f49]">
+      <div className="flex items-center justify-between p-4.5 border-b border-[#1f2d3b] shadow-sm">
         {(!isCollapsed || isMobile) && (
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-[#075985] rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-[#1f2d3b] border border-slate-700 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">C</span>
             </div>
             <span className="text-lg font-semibold text-[#ffffff]">
@@ -148,14 +154,7 @@ const Sidebar = ({
         )}
         <button
           onClick={isMobile ? onCloseMobileMenu : onToggle}
-          className="p-2 rounded-lg hover:bg-[#0c4a6e] text-[#ffffff] transition-colors"
-          aria-label={
-            isMobile
-              ? "Close menu"
-              : isCollapsed
-              ? "Expand sidebar"
-              : "Collapse sidebar"
-          }
+          className="p-2 rounded-lg text-[#ffffff] transition-colors duration-300 ease-in-out cursor-pointer"
         >
           {isMobile ? (
             <svg
@@ -190,55 +189,60 @@ const Sidebar = ({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="flex-1 p-4 space-y-2 shadow-md">
         {navigationItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => {
-              onPageChange(item.id);
-              if (isMobile) {
-                onCloseMobileMenu();
-              }
-            }}
-            className={`
-              w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-[16px]   
-              ${
-                currentPage === item.id
-                  ? "bg-[#0c4a6e] text-white"
-                  : "hover:text-[#0c4a6e] text-[#ffffff] hover:bg-gray-100"
-              }
-              ${isCollapsed && !isMobile ? "justify-center" : ""}
-            `}
-            title={isCollapsed ? item.name : ""}
-          >
-            <span className="flex-shrink-0">{item.icon}</span>
-            {(!isCollapsed || isMobile) && (
-              <span className="font-medium truncate">{item.name}</span>
+          <div key={item.id} className="relative group">
+            <Link
+              to={item?.path}
+              onClick={() => {
+                if (isMobile) onCloseMobileMenu();
+              }}
+              className={`
+          w-full flex items-center space-x-3 px-3 py-2 rounded-sm text-left text-[14px] cursor-pointer
+          ${
+            location?.pathname === item?.path
+              ? "bg-[#1f2d3b] text-white"
+              : "hover:bg-[#1f2d3b] hover:text-white text-[#9eacbd]"
+          }
+          ${isCollapsed && !isMobile ? "justify-center" : ""}
+        `}
+            >
+              <span className="flex-shrink-0">{item?.icon}</span>
+              {(!isCollapsed || isMobile) && (
+                <span className="font-medium truncate">{item?.name}</span>
+              )}
+            </Link>
+
+            {/* Tooltip */}
+            {isCollapsed && !isMobile && (
+              <span
+                className="
+            absolute left-full top-1/2 -translate-y-1/2 ml-3
+            px-3 py-2 text-xs rounded-r-sm bg-[#233242] text-white shadow-lg
+            opacity-0 group-hover:opacity-100 transition-opacity duration-200
+            whitespace-nowrap z-50
+          "
+              >
+                {item?.name}
+              </span>
             )}
-          </button>
+          </div>
         ))}
       </nav>
-
       {/* Footer */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4">
         <div
           className={`flex items-center ${
             isCollapsed && !isMobile ? "justify-center" : "justify-between"
           }`}
         >
-          {(!isCollapsed || isMobile) && (
-            <div className="flex items-center space-x-3 ">
-              <div className="w-8 h-8 bg-[#075985] rounded-full flex items-center justify-center">
-                <span className="text-white font-medium text-sm">SA</span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">
-                  System Admin
-                </p>
-                <p className="text-xs text-white truncate">Administrator</p>
-              </div>
-            </div>
-          )}
+          <button
+            className="p-2 flex items-center gap-3 rounded-full text-white cursor-pointer transition-colors"
+            title="Sign Out"
+          >
+            <FiLogOut className="text-lg" />{" "}
+            {(!isCollapsed || isMobile) && "Sign out"}
+          </button>
         </div>
       </div>
     </div>

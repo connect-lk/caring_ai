@@ -3,9 +3,9 @@ import React from "react";
 
 const AuthBrandingFeatures = () => {
   return (
-    <div className="bg-[#075985]  text-white flex  flex-col justify-center  p-12 lg:p-16">
+    <div className="auth_right_color text-white flex  flex-col justify-center  p-12 lg:p-16">
       <h1 className="text-2xl font-semibold mb-2 tracking-wide">Caring AI</h1>
-      <h2 className="text-lg font-normal border-b border-white/20 pb-4 mb-6">
+      <h2 className="text-lg font-normal border-b border-white/20 w-fit pb-4 mb-6">
         Cognitive Assessment Platform
       </h2>
 

@@ -30,7 +30,7 @@ const InputField = ({
       <div
         className={`flex items-center bg-white border ${
           error && touched ? "border-red-500" : "border-gray-200"
-        } rounded-xl shadow-xs transition-all duration-200 focus-within:ring-2 focus-within:ring-[#075985]/50 focus-within:border-transparent`}
+        } rounded-xl shadow-xs transition-all duration-200 focus-within:ring-1 focus-within:ring-[#475569]/50 focus-within:border-transparent`}
       >
         <div className="px-4 text-gray-400">
           <Icon size={20} />

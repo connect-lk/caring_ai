@@ -8,23 +8,11 @@ const Layout = ({ children, currentPage, onPageChange }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -39,7 +27,7 @@ const Layout = ({ children, currentPage, onPageChange }) => {
       {/* Sidebar */}
       <Sidebar
         isCollapsed={isCollapsed}
-        onToggle={toggleSidebar}
+        onToggle={() => setIsCollapsed(!isCollapsed)}
         currentPage={currentPage}
         onPageChange={onPageChange}
         isMobile={isMobile}
@@ -50,20 +38,27 @@ const Layout = ({ children, currentPage, onPageChange }) => {
       {/* Main content */}
       <div
         className={`
-        transition-all duration-300 ease-in-out
-        ${isCollapsed ? "lg:ml-16" : "lg:ml-64"}
-      `}
+          transition-all duration-300 ease-in-out
+          ${isCollapsed ? "lg:ml-16" : "lg:ml-64"}
+        `}
       >
         {/* Fixed Header */}
         <div
-          className="fixed top-0 z-30 bg-white  shadow-sm border-gray-200"
+          className="fixed top-0 z-30 bg-white shadow-sm border-b border-gray-200"
           style={{
             left: isMobile ? "0" : isCollapsed ? "4rem" : "16rem",
             right: "0",
             transition: "left 0.3s ease-in-out",
           }}
         >
-          <Header isCollapsed={isCollapsed} onToggle={toggleMobileMenu} />
+          <Header
+            isCollapsed={isCollapsed}
+            onToggle={() =>
+              isMobile
+                ? setIsMobileMenuOpen(!isMobileMenuOpen)
+                : setIsCollapsed(!isCollapsed)
+            }
+          />
         </div>
 
         {/* Scrollable Page content */}

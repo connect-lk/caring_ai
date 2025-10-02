@@ -1,8 +1,20 @@
 import { useState } from "react";
-
+import { useLocation } from "react-router-dom"; // ✅ import navigate
+const navigationItems = [
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Request Assessment", path: "/request-assessment" },
+  { name: "Assessment Results", path: "/assessment-results" },
+  { name: "Booking Queue", path: "/booking-queue" },
+  { name: "Settings", path: "/settings" },
+];
 const Header = ({ onToggle }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const location = useLocation();
 
+  // Find the matching navigation item
+  const currentNav = navigationItems?.find(
+    (item) => item?.path === location?.pathname
+  );
   return (
     <header className="px-6 py-4">
       <div className="flex items-center justify-between">
@@ -35,15 +47,8 @@ const Header = ({ onToggle }) => {
               <ol className="flex items-center space-x-2">
                 <li>
                   <div className="flex items-center">
-                    {/* <svg
-                      className="h-4 w-4 text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                    </svg> */}
                     <span className="ml-2 text-sm font-medium text-gray-500">
-                      Dashboard
+                      {currentNav ? currentNav.name : "Dashboard"}
                     </span>
                   </div>
                 </li>
@@ -125,11 +130,11 @@ const Header = ({ onToggle }) => {
 
           {/* User avatar */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-[#075985] rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-color rounded-full flex items-center justify-center">
               <span className="text-white font-medium text-sm">SA</span>
             </div>
             <div className="hidden sm:block">
-              <p className="text-sm font-medium text-gray-900">System Admin</p>
+              <p className="text-sm font-medium text-gray-900">Super Admin</p>
               <p className="text-xs text-gray-500">Administrator</p>
             </div>
           </div>

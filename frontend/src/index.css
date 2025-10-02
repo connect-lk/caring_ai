@@ -109,8 +109,19 @@ a {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* all project theme */
 
+.bg-color {
+  background-color: #475569;
+}
+.bg-hover:hover {
+  background-color: #334155;
+}
+.text-color {
+  color: #475569;
+}
 
-
-
-/* all project theme sky-800 use #075985 */
+.auth_right_color {
+  background-color: #233242;
+}
+ 

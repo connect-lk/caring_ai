@@ -33,7 +33,7 @@ const Signup = () => {
         <div className="flex flex-col items-center justify-center p-8 sm:p-8  lg:p-16 bg-gray-50 md:bg-white">
           <div className="w-full max-w-lg bg-white rounded-3xl shadow-[0px_4px_20px_10px_rgba(0,0,0,0.05)] border border-[#e2e8f0]  outline-1 outline-offset-[-1px] outline-white/40 backdrop-blur-[6px] p-8  ">
             <div className="flex flex-col items-center mb-6 w-full">
-              <div className="w-14 h-14 bg-[#075985] text-white rounded-full flex items-center justify-center font-bold text-xl mb-3">
+              <div className="w-14 h-14 bg-color text-white rounded-full flex items-center justify-center font-bold text-xl mb-3">
                 CA
               </div>
               <h3 className="text-xl font-semibold text-gray-800">Caring AI</h3>
@@ -108,7 +108,7 @@ const Signup = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-2 bg-[#075985] text-white text-md font-semibold py-3 rounded-md hover:bg-[#055a8a] cursor-pointer transition duration-300 disabled:opacity-75 disabled:cursor-not-allowed shadow-md capitalize tracking-wide"
+                    className="w-full mt-2 bg-color bg-hover text-white text-md font-semibold py-3 rounded-md   cursor-pointer transition duration-300 disabled:opacity-75 disabled:cursor-not-allowed shadow-md capitalize tracking-wide"
                   >
                     {isSubmitting ? "Signing Up..." : "Sign Up"}
                   </button>
@@ -116,7 +116,7 @@ const Signup = () => {
                     Already have an account?{" "}
                     <span
                       onClick={() => navigate("/login")}
-                      className="text-[#075985] font-semibold cursor-pointer hover:underline"
+                      className="text-color font-semibold cursor-pointer hover:underline"
                     >
                       Login
                     </span>
