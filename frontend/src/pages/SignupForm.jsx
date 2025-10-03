@@ -1,31 +1,57 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Mail, Lock, XCircle, CheckCircle } from "lucide-react";
+import { Mail, Lock, AlertCircle, CheckCircle } from "lucide-react";
 import InputField from "../components/InputField";
 import { useNavigate } from "react-router-dom";
 import AuthBrandingFeatures from "../components/comman/AuthBrandingFeatures";
+import { useAuth } from "../contexts/AuthContext";
+import { useState } from "react";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { signup, error, clearError } = useAuth();
+  const [signupError, setSignupError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    username: Yup.string()
+      .min(3, "Username must be at least 3 characters")
+      .required("Username is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+      )
       .required("Password is required"),
   });
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log("Login Data:", values);
-
-    // Simulate login process
-    setTimeout(() => {
-      navigate("/login");
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      setSignupError("");
+      setSuccessMessage("");
+      clearError();
+      
+      const result = await signup(values);
+      
+      if (result.success) {
+        setSuccessMessage(result.message);
+        resetForm();
+        // Redirect to login after 3 seconds
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else {
+        setSignupError(result.message);
+      }
+    } catch (error) {
+      setSignupError("An unexpected error occurred. Please try again.");
+    } finally {
       setSubmitting(false);
-      resetForm();
-    }, 1000);
+    }
   };
   return (
     <div className="font-sans min-h-screen flex items-center justify-center bg-gray-50 p-0  ">
@@ -45,8 +71,28 @@ const Signup = () => {
               </p>
             </div>
 
+            {/* Success Message */}
+            {successMessage && (
+              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-md">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
+                  <p className="text-sm text-green-700">{successMessage}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error Display */}
+            {(error || signupError) && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                <div className="flex items-center">
+                  <AlertCircle className="h-5 w-5 text-red-400 mr-2" />
+                  <p className="text-sm text-red-700">{error || signupError}</p>
+                </div>
+              </div>
+            )}
+
             <Formik
-              initialValues={{ name: "", email: "", password: "" }}
+              initialValues={{ username: "", email: "", password: "" }}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
             >
@@ -65,14 +111,14 @@ const Signup = () => {
                     Username
                   </label>
                   <InputField
-                    name="name"
-                    type="name"
-                    placeholder="Name"
-                    value={values.name}
+                    name="username"
+                    type="text"
+                    placeholder="Enter your username"
+                    value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={errors.name}
-                    touched={touched.name}
+                    error={errors.username}
+                    touched={touched.username}
                   />
                   <label className="block text-sm font-semibold text-gray-800">
                     Email

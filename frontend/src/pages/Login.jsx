@@ -1,30 +1,47 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Mail, Lock, XCircle, CheckCircle } from "lucide-react";
+import { Mail, Lock, AlertCircle } from "lucide-react";
 import InputField from "../components/InputField";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthBrandingFeatures from "../components/comman/AuthBrandingFeatures";
+import { useAuth } from "../contexts/AuthContext";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login, error, clearError } = useAuth();
+  const [loginError, setLoginError] = useState("");
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
   });
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log("Login Data:", values);
-
-    // Simulate login process
-    setTimeout(() => {
-      navigate("/dashboard");
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      setLoginError("");
+      clearError();
+      
+      const result = await login(values);
+      
+      if (result.success) {
+        // Redirect to intended page or dashboard
+        const from = location.state?.from?.pathname || "/dashboard";
+        navigate(from, { replace: true });
+        resetForm();
+      } else {
+        setLoginError(result.message);
+      }
+    } catch (error) {
+      setLoginError("An unexpected error occurred. Please try again.");
+    } finally {
       setSubmitting(false);
-      resetForm();
-    }, 1000);
+    }
   };
 
   return (
@@ -44,6 +61,16 @@ const Login = () => {
                 Sign in to your account to continue
               </p>
             </div>
+
+            {/* Error Display */}
+            {(error || loginError) && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                <div className="flex items-center">
+                  <AlertCircle className="h-5 w-5 text-red-400 mr-2" />
+                  <p className="text-sm text-red-700">{error || loginError}</p>
+                </div>
+              </div>
+            )}
 
             <Formik
               initialValues={{ email: "", password: "" }}

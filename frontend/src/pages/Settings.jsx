@@ -69,9 +69,9 @@ const tabs = [
         <div className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-blue-100   rounded-lg flex items-center justify-center">
                 <svg
-                  className="h-5 w-5 text-blue-600 dark:text-blue-400"
+                  className="h-5 w-5 text-blue-600  "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -85,10 +85,10 @@ const tabs = [
                 </svg>
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-900  ">
                   Application Configuration & Management
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600  ">
                   Configure system settings, manage users, and customize
                   application behavior
                 </p>
@@ -96,7 +96,7 @@ const tabs = [
             </div>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-100   text-gray-600  transition-colors"
               aria-label={isExpanded ? "Collapse section" : "Expand section"}
             >
               <svg
@@ -120,14 +120,14 @@ const tabs = [
 
         {isExpanded && (
           <div className="px-6 pb-6">
-            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+            <div className="bg-gray-50   rounded-lg p-4">
+              <p className="text-sm text-gray-700   mb-4">
                 This settings page provides comprehensive system administration
                 and configuration options:
               </p>
 
               {/* Ordered List */}
-              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700  ">
                 <li>
                   <span className="font-semibold">Organization Settings:</span>{" "}
                   Configure clinic information, contact details, and branding
@@ -165,7 +165,7 @@ const tabs = [
                 </li>
               </ol>
 
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-4">
+              <p className="text-sm text-gray-700   mt-4">
                 Admin privileges are required to access most configuration
                 options. Contact your system administrator if you need
                 additional access.
@@ -187,8 +187,8 @@ const tabs = [
                   w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg cursor-pointer transition-colors duration-200
                   ${
                     activeTab === tab?.id
-                      ? "  text-primary-700 dark:text-primary-300 bg-gray-200  "
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      ? "  text-primary-700   bg-gray-200  "
+                      : "text-gray-700   hover:bg-gray-100  "
                   }
                 `}
               >
@@ -201,7 +201,7 @@ const tabs = [
 
         {/* Main Content */}
         <div className="flex-1">
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8">
+          <div className="bg-white  0 rounded-lg border border-gray-200 p-8">
             {/* Account Settings */}
             {activeTab === "organization" && (
             <OrganizationDetails/>
@@ -210,17 +210,17 @@ const tabs = [
             {/* Notification Settings */}
             {activeTab === "doctors" && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-900  ">
                   Notification Preferences
                 </h2>
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-sm font-medium text-gray-900  ">
                         Email Notifications
                       </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-500  ">
                         Receive notifications via email
                       </p>
                     </div>
@@ -229,7 +229,7 @@ const tabs = [
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
                         formData.notifications.email
                           ? "bg-primary-600"
-                          : "bg-gray-200 dark:bg-gray-700"
+                          : "bg-gray-200  "
                       }`}
                     >
                       <span
@@ -244,10 +244,10 @@ const tabs = [
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-sm font-medium text-gray-900  ">
                         Push Notifications
                       </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-500  ">
                         Receive push notifications in browser
                       </p>
                     </div>
@@ -256,7 +256,7 @@ const tabs = [
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
                         formData.notifications.push
                           ? "bg-primary-600"
-                          : "bg-gray-200 dark:bg-gray-700"
+                          : "bg-gray-200  "
                       }`}
                     >
                       <span
@@ -271,10 +271,10 @@ const tabs = [
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-sm font-medium text-gray-900  ">
                         SMS Notifications
                       </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-500  ">
                         Receive notifications via SMS
                       </p>
                     </div>
@@ -283,7 +283,7 @@ const tabs = [
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
                         formData.notifications.sms
                           ? "bg-primary-600"
-                          : "bg-gray-200 dark:bg-gray-700"
+                          : "bg-gray-200  "
                       }`}
                     >
                       <span
@@ -302,20 +302,20 @@ const tabs = [
             {/* Preferences */}
             {activeTab === "patients" && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-900  ">
                   Preferences
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700   mb-2">
                       Theme
                     </label>
                     <select
                       name="theme"
                       value={formData.preferences.theme}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300   rounded-lg bg-white   text-gray-900   focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
                       <option value="light">Light</option>
                       <option value="dark">Dark</option>
@@ -324,14 +324,14 @@ const tabs = [
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700  mb-2">
                       Language
                     </label>
                     <select
                       name="language"
                       value={formData.preferences.language}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300   rounded-lg bg-white   text-gray-900   focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
                       <option value="en">English</option>
                       <option value="es">Spanish</option>
@@ -341,14 +341,14 @@ const tabs = [
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700   mb-2">
                       Timezone
                     </label>
                     <select
                       name="timezone"
                       value={formData.preferences.timezone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300   rounded-lg bg-white   text-gray-900   focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
                       <option value="UTC">UTC</option>
                       <option value="EST">Eastern Time</option>
@@ -363,7 +363,7 @@ const tabs = [
             {/* Security */}
             {activeTab === "assessmenttypes" && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-900  ">
                   Security Settings
                 </h2>
                 <SecurityFeatures />
@@ -371,7 +371,7 @@ const tabs = [
             )}
 
             {/* Save Button */}
-            {/* <div className="pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+            {/* <div className="pt-6 border-t border-gray-200  flex justify-end">
               <button
                 onClick={handleSave}
                 className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors duration-200"

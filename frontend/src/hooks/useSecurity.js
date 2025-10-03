@@ -44,9 +44,13 @@ export const useSecurity = () => {
     localStorage.removeItem('caring-ai-theme');
     sessionStorage.clear();
     
-    // In a real app, this would redirect to login
-    alert('Session expired for security. Please log in again.');
-    // window.location.href = '/login';
+    // Clear any cookies by calling logout
+    if (window.authService) {
+      window.authService.logout().catch(console.error);
+    }
+    
+    // Redirect to login
+    window.location.href = '/login';
   }, []);
 
   const extendSession = useCallback(() => {

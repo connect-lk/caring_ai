@@ -1,5 +1,6 @@
 import { FiLogOut } from "react-icons/fi";
-import { useLocation, Link } from "react-router-dom"; // ✅ import navigate
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Sidebar = ({
   isCollapsed,
@@ -9,6 +10,17 @@ const Sidebar = ({
   onCloseMobileMenu,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   const navigationItems = [
     {
@@ -232,12 +244,13 @@ const Sidebar = ({
       {/* Footer */}
       <div className="p-4">
         <div
-          className={`flex items-center ${
+          className={`flex items-center hover:bg-[#1f2d3b] hover:bg-opacity-20 ${
             isCollapsed && !isMobile ? "justify-center" : "justify-between"
           }`}
         >
           <button
-            className="p-2 flex items-center gap-3 rounded-full text-white cursor-pointer transition-colors"
+            onClick={handleLogout}
+            className="p-2 flex items-center gap-3 rounded-full text-white cursor-pointer transition-colors "
             title="Sign Out"
           >
             <FiLogOut className="text-lg" />{" "}
