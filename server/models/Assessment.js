@@ -6,7 +6,9 @@ const assessmentSchema = new mongoose.Schema({
         name: String,
         age: Number,
         gender: String,
-        contact: String
+        contact: String,
+        ethnicity: String,
+        isCaregiver: Boolean
     },
     assessmentDetails: {
         type: String,

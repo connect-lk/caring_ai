@@ -1,9 +1,18 @@
 // crypto-utils.js
 import crypto from "crypto";
 
-const key = Buffer.from(process.env.FIELD_ENC_KEY || "", "base64"); // expect 32 bytes
+// Generate a default key if not provided (for development only)
+const defaultKey = "FycXEwZaFnuF7LQ4qEqdpnoQbMY6lScOUO/AlsAWAW8=";
+const keyString = process.env.FIELD_ENC_KEY || defaultKey;
+
+const key = Buffer.from(keyString, "base64"); // expect 32 bytes
 if (key.length !== 32) {
     throw new Error("FIELD_ENC_KEY must be 32 bytes (base64)");
+}
+
+// Warn if using default key in production
+if (process.env.NODE_ENV === 'production' && !process.env.FIELD_ENC_KEY) {
+    console.warn("WARNING: Using default encryption key in production. Set FIELD_ENC_KEY environment variable.");
 }
 
 export function encrypt(text) {

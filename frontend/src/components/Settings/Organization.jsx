@@ -104,7 +104,7 @@ const OrganizationDetails = () => {
                 <button
                   type="button"
                   onClick={handleEditClick}
-                  className="px-6 py-2 bg-color text-white font-medium rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition duration-150"
+                  className="px-6 py-2 bg-color text-white font-medium rounded-lg shadow-md bg-hover cursor-pointer transition duration-150"
                 >
                   Edit Details
                 </button>
@@ -128,8 +128,8 @@ const OrganizationDetails = () => {
                                               !dirty ||
                                               isSubmitting ||
                                               isLoading
-                                                ? "px-6 py-2 bg-gray-600 text-white font-medium rounded-lg cursor-pointer shadow-md hover:bg-gray-700 transition duration-150"
-                                                : "px-6 py-2 bg-gray-600 text-white font-medium rounded-lg cursor-pointer shadow-md hover:bg-gray-700 transition duration-150"
+                                                ? "px-6 py-2 bg-color text-white font-medium rounded-lg cursor-pointer shadow-md bg-hover transition duration-150"
+                                                : "px-6 py-2 bg-color text-white font-medium rounded-lg cursor-pointer shadow-md bg-hover transition duration-150"
                                             }`}
                     disabled={!isValid || !dirty || isSubmitting || isLoading}
                   >
@@ -277,8 +277,8 @@ const OrganizationDetails = () => {
                                               !dirty ||
                                               isSubmitting ||
                                               isLoading
-                                                ? "px-6 py-2 bg-gray-600 text-white font-medium rounded-lg cursor-pointer shadow-md hover:bg-gray-700 transition duration-150"
-                                                : "px-6 py-2 bg-gray-600 text-white font-medium rounded-lg cursor-pointer shadow-md hover:bg-gray-700 transition duration-150"
+                                                ? "px-6 py-2 bg-color text-white font-medium rounded-lg cursor-pointer shadow-md bg-hover transition duration-150"
+                                                : "px-6 py-2 bg-color text-white font-medium rounded-lg cursor-pointer shadow-md bg-hover transition duration-150"
                                             }`}
                   disabled={!isValid || !dirty || isSubmitting || isLoading}
                 >

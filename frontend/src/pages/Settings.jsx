@@ -66,7 +66,7 @@ const tabs = [
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl mt-6 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)]   outline-1 outline-offset-[-1px] outline-white/40 backdrop-blur-[6px] mb-8">
-        <div className="p-6">
+        <div   onClick={() => setIsExpanded(!isExpanded)}  className="p-6 cursor-pointer">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-blue-100   rounded-lg flex items-center justify-center">
