@@ -7,11 +7,11 @@ const PatientInformation = ({ initialValues, validationSchema, onSubmit }) => {
   const [searchQuery, setSearchQuery] = useState(
     initialValues.searchPatient || ""
   );
-  const [searchError, setSearchError] = useState("");
+  // const [searchError, setSearchError] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setSearchError("");
+    // setSearchError("");
   };
 
   const initialStepValues = {

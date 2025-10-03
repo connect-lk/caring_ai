@@ -15,6 +15,8 @@ import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import SignupForm from "./pages/SignupForm";
 import CognitiveAssessmentReport from "./pages/CognitiveAssessmentReport";
+import Doctors from "./pages/Doctors";
+import Patients from "./pages/Patients";
 
 function App() {
   return (
@@ -63,6 +65,30 @@ function App() {
             element={
               <Layout>
                 <Settings />
+              </Layout>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <Layout>
+                <Doctors />
+              </Layout>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <Layout>
+                <Doctors />
+              </Layout>
+            }
+          />
+          <Route
+            path="/patients"
+            element={
+              <Layout>
+                <Patients />
               </Layout>
             }
           />
