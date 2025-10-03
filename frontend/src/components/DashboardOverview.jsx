@@ -7,7 +7,7 @@ const DashboardOverview = () => {
     <div className="mb-8">
       {/* <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900  ">
             Dashboard
           </h1>
         </div>
@@ -18,9 +18,9 @@ const DashboardOverview = () => {
         <div className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-blue-100   rounded-lg flex items-center justify-center">
                 <svg
-                  className="h-5 w-5 text-blue-600 dark:text-blue-400"
+                  className="h-5 w-5 text-blue-600  "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -34,17 +34,17 @@ const DashboardOverview = () => {
                 </svg>
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-900  ">
                   Dashboard Overview
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600  ">
                   Quick overview of your assessment statistics and key actions.
                 </p>
               </div>
             </div>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-100  text-gray-600   transition-colors"
               aria-label={isExpanded ? "Collapse section" : "Expand section"}
             >
               <svg
@@ -68,8 +68,8 @@ const DashboardOverview = () => {
 
         {isExpanded && (
           <div className="px-6 pb-6">
-            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <p className="text-sm text-gray-700 dark:text-gray-300">
+            <div className="bg-gray-50   rounded-lg p-4">
+              <p className="text-sm text-gray-700  ">
                 Welcome to your CaringAI dashboard. Here you can monitor
                 assessment requests, review completed assessments, and manage
                 your cognitive assessment workflow. All data is processed
