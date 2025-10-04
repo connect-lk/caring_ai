@@ -14,7 +14,7 @@ export const auditLogger = (action, targetType) => {
         // Create audit log entry with real public IP fallback
         const clientIP = await getUserIPWithRealFallback(req);
         const auditData = {
-          user: req.user?.id || null,
+          user: req.user?.id ? req.user.id.toString() : null,
           action,
           recordType: targetType,
           recordId: res.locals?.targetId || null,
@@ -30,11 +30,6 @@ export const auditLogger = (action, targetType) => {
             timestamp: new Date()
           }
         };
-
-        // Encrypt sensitive fields for HIPAA compliance
-        if (auditData.user) {
-          auditData.user = encrypt(auditData.user.toString());
-        }
         
         await AuditLog.create(auditData);
         
@@ -78,7 +73,7 @@ export const authAuditLogger = () => {
 
         const clientIP = await getUserIPWithRealFallback(req);
         const auditData = {
-          user: req.user?.id || null,
+          user: req.user?.id ? req.user.id.toString() : null,
           action,
           recordType: "AUTHENTICATION",
           recordId: null,

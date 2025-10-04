@@ -18,6 +18,8 @@ import Login from "./pages/Login";
 import SignupForm from "./pages/SignupForm";
 import EmailVerification from "./pages/EmailVerification";
 import CognitiveAssessmentReport from "./pages/CognitiveAssessmentReport";
+import Doctors from "./pages/Doctors";
+import Patients from "./pages/Patients";
 
 function App() {
   return (
@@ -30,67 +32,79 @@ function App() {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/verify/:token" element={<EmailVerification />} />
 
-            {/* Protected Routes (inside layout) */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Layout> 
-                    <Dashboard /> 
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/request-assessment"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <RequestAssessment />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/assessment-results"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <AssessmentResults />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/booking-queue"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <BookingQueue />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <Settings />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/cognitive-assessment-report"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <CognitiveAssessmentReport />
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
+          {/* Protected Routes (inside layout) */}
+          <Route
+            path="/dashboard"
+            element={
+              <Layout> 
+                <Dashboard /> 
+              </Layout>
+            }
+          />
+          <Route
+            path="/request-assessment"
+            element={
+              <Layout>
+                <RequestAssessment />
+              </Layout>
+            }
+          />
+          <Route
+            path="/assessment-results"
+            element={
+              <Layout>
+                <AssessmentResults />
+              </Layout>
+            }
+          />
+          <Route
+            path="/booking-queue"
+            element={
+              <Layout>
+                <BookingQueue />
+              </Layout>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <Layout>
+                <Settings />
+              </Layout>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <Layout>
+                <Doctors />
+              </Layout>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <Layout>
+                <Doctors />
+              </Layout>
+            }
+          />
+          <Route
+            path="/patients"
+            element={
+              <Layout>
+                <Patients />
+              </Layout>
+            }
+          />
+          <Route
+            path="/cognitive-assessment-report"
+            element={
+              <Layout>
+                <CognitiveAssessmentReport />
+              </Layout>
+            }
+          />
 
             {/* Default redirect to login */}
             <Route path="/" element={<Navigate to="/login" replace />} />

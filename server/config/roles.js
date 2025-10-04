@@ -5,6 +5,10 @@ export const roles = {
             "patients:read",
             "patients:update",
             "patients:delete",
+            "doctors:create",
+            "doctors:read",
+            "doctors:update",
+            "doctors:delete",
             "assessments:create",
             "assessments:read",
             "assessments:update",
@@ -14,20 +18,19 @@ export const roles = {
     },
     Admin: {
         can: [
+            "patients:create",
             "patients:read",
             "patients:update",
+            "patients:delete",
+            "doctors:create",
+            "doctors:read",
+            "doctors:update",
+            "doctors:delete",
             "assessments:create",
             "assessments:read",
-            "assessments:update"
+            "assessments:update",
+            "assessments:delete",
+            "audit:read"
         ]
     },
-    // Doctor: {
-    //     can: ["assessments:create", "assessments:read", "assessments:update"]
-    // },
-    // Nurse: {
-    //     can: ["assessments:read", "assessments:update"]
-    // },
-    // Patient: {
-    //     can: ["assessments:read"] // maybe only their own
-    // }
 };

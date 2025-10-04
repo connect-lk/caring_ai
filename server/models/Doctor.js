@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import { encrypt, decrypt } from '../utils/fieldEncryption.js';
 
-const patientSchema = new mongoose.Schema({
-  // Only the 4 essential fields
+const doctorSchema = new mongoose.Schema({
+  // Doctor Information - All PHI fields are encrypted
   name: {
     type: String,
-    required: [true, 'Patient name is required'],
+    required: [true, 'Doctor name is required'],
     set: encrypt,
     get: decrypt,
     maxlength: [100, 'Name cannot exceed 100 characters']
@@ -17,26 +17,22 @@ const patientSchema = new mongoose.Schema({
     get: decrypt,
     maxlength: [255, 'Email cannot exceed 255 characters'],
   },
-  contactNo: {
+  phone: {
     type: String,
-    required: [true, 'Contact number is required'],
+    required: [true, 'Phone number is required'],
     set: encrypt,
     get: decrypt,
   },
-  dateOfBirth: {
-    type: Date,
-    required: [true, 'Date of birth is required']
-    // Not encrypted - dates are less sensitive and avoid decryption issues
-  },
-  age: {
-    type: Number,
-    required: [true, 'Age is required'],
-    min: [0, 'Age must be a positive number'],
-    max: [150, 'Age must be realistic']
+  specialty: {
+    type: String,
+    required: [true, 'Medical specialty is required'],
+    set: encrypt,
+    get: decrypt,
+    maxlength: [100, 'Specialty cannot exceed 100 characters']
   },
   
-  // System fields (minimal)
-  patientId: {
+  // System fields
+  doctorId: {
     type: String,
     unique: true,
     required: false // Will be auto-generated in pre-save middleware
@@ -73,20 +69,20 @@ const patientSchema = new mongoose.Schema({
   toObject: { getters: true }
 });
 
-// Pre-save middleware to generate unique patient ID
-patientSchema.pre('save', function(next) {
-  // Always generate patientId if not present
-  if (!this.patientId || this.patientId === '') {
-    // Generate unique patient ID with prefix PAT
+// Pre-save middleware to generate unique doctor ID
+doctorSchema.pre('save', function(next) {
+  // Always generate doctorId if not present
+  if (!this.doctorId || this.doctorId === '') {
+    // Generate unique doctor ID with prefix DOC
     const timestamp = Date.now().toString().slice(-6);
     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-    this.patientId = `PAT${timestamp}${random}`;
+    this.doctorId = `DOC${timestamp}${random}`;
   }
   next();
 });
 
 // Index for better query performance
-patientSchema.index({ patientId: 1 }, { unique: true });
-patientSchema.index({ createdAt: -1 });
+doctorSchema.index({ doctorId: 1 }, { unique: true });
+doctorSchema.index({ createdAt: -1 });
 
-export default mongoose.model('Patient', patientSchema);
+export default mongoose.model('Doctor', doctorSchema);

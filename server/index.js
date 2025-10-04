@@ -6,6 +6,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { dbConnection } from "./db_connection/dbConnect.js";
 import userRoute from "./routes/userRoute.js";
+import patientRoutes from "./routes/patientRoutes.js";
+import doctorRoutes from "./routes/doctorRoutes.js";
 import { securityHeaders, sessionSecurity } from "./middleware/security.js";
 
 const app = express();
@@ -110,6 +112,8 @@ app.get("/api/ip-test", async (req, res) => {
 
 // API routes
 app.use("/api/auth", userRoute);
+app.use("/api/patients", patientRoutes);
+app.use("/api/doctors", doctorRoutes);
 
 // Example API route (remove in production)
 app.get("/api/users", (req, res) => {

@@ -11,11 +11,12 @@ import {
   FileSearch,
 } from "lucide-react"; 
 import OrganizationDetails from "../components/Settings/Organization";
+import {ApplicationConfigurationManagement} from '../DynamicData.js'
+import CognitiveAssessmentdetails from "../components/requestAssessment/CognitiveAssessmentdetails.jsx";
 
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("organization");
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState("organization"); 
 
   const [formData, setFormData] = useState({
     displayName: "System Admin",
@@ -54,9 +55,7 @@ const Settings = () => {
  
 
 const tabs = [
-  { id: "organization", name: "Organization", icon: SettingsIcon },
-  { id: "doctors", name: "Doctors", icon: UserCog },
-  { id: "patients", name: "Patients", icon: Users },
+  { id: "organization", name: "Organization", icon: SettingsIcon },  
   { id: "assessmenttypes", name: "Assessment Types", icon: ClipboardList },
   { id: "genders", name: "Genders", icon: VenusAndMars }, // ✅ fixed
   { id: "ethnicities", name: "Ethnicities", icon: Globe2 },
@@ -65,115 +64,8 @@ const tabs = [
 ];
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-xl mt-6 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)]   outline-1 outline-offset-[-1px] outline-white/40 backdrop-blur-[6px] mb-8">
-        <div   onClick={() => setIsExpanded(!isExpanded)}  className="p-6 cursor-pointer">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-100   rounded-lg flex items-center justify-center">
-                <svg
-                  className="h-5 w-5 text-blue-600  "
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900  ">
-                  Application Configuration & Management
-                </h2>
-                <p className="text-sm text-gray-600  ">
-                  Configure system settings, manage users, and customize
-                  application behavior
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 rounded-lg hover:bg-gray-100   text-gray-600  transition-colors"
-              aria-label={isExpanded ? "Collapse section" : "Expand section"}
-            >
-              <svg
-                className={`h-5 w-5 transition-transform duration-200 cursor-pointer ${
-                  isExpanded ? "rotate-180" : ""
-                }`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
 
-        {isExpanded && (
-          <div className="px-6 pb-6">
-            <div className="bg-gray-50   rounded-lg p-4">
-              <p className="text-sm text-gray-700   mb-4">
-                This settings page provides comprehensive system administration
-                and configuration options:
-              </p>
-
-              {/* Ordered List */}
-              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700  ">
-                <li>
-                  <span className="font-semibold">Organization Settings:</span>{" "}
-                  Configure clinic information, contact details, and branding
-                </li>
-                <li>
-                  <span className="font-semibold">
-                    Assessment Configuration:
-                  </span>{" "}
-                  Manage test types, genders, ethnicities, and other dropdown
-                  options
-                </li>
-                <li>
-                  <span className="font-semibold">Doctor Management:</span> Add,
-                  edit, and manage doctor profiles and specializations
-                </li>
-                <li>
-                  <span className="font-semibold">Patient Database:</span>{" "}
-                  Access patient management tools and duplicate detection
-                </li>
-                <li>
-                  <span className="font-semibold">AI Integration:</span>{" "}
-                  Configure Awaz.AI settings and API connections
-                </li>
-                <li>
-                  <span className="font-semibold">User Management:</span>{" "}
-                  Control user access, roles, and permissions (admin only)
-                </li>
-                <li>
-                  <span className="font-semibold">System Monitoring:</span> View
-                  audit logs and track system changes
-                </li>
-                <li>
-                  <span className="font-semibold">Data Management:</span>{" "}
-                  MongoDB integration and field mapping configuration
-                </li>
-              </ol>
-
-              <p className="text-sm text-gray-700   mt-4">
-                Admin privileges are required to access most configuration
-                options. Contact your system administrator if you need
-                additional access.
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
+     <CognitiveAssessmentdetails NewAssessment={ApplicationConfigurationManagement}/>
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar Navigation */}

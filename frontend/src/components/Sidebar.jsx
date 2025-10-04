@@ -1,7 +1,7 @@
 import { FiLogOut } from "react-icons/fi";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom"; // ✅ import navigate
+import { UserCog } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-
 const Sidebar = ({
   isCollapsed,
   onToggle,
@@ -134,6 +134,18 @@ const Sidebar = ({
           />
         </svg>
       ),
+    },
+    {
+      id: "doctors",
+      name: "Doctors",
+      path: "/doctors",
+      icon: <UserCog className="h-5 w-5" />,
+    },
+    {
+      id: "patients",
+      name: "Patients",
+      path: "/patients",
+      icon: <UserCog className="h-5 w-5" />,
     },
   ];
 

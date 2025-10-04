@@ -16,6 +16,9 @@ if (process.env.NODE_ENV === 'production' && !process.env.FIELD_ENC_KEY) {
 }
 
 export function encrypt(text) {
+    if (text === null || text === undefined) {
+        return text;
+    }
     const iv = crypto.randomBytes(12);
     const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
     const encrypted = Buffer.concat([
@@ -27,12 +30,28 @@ export function encrypt(text) {
 }
 
 export function decrypt(data) {
-    const b = Buffer.from(data, "base64");
-    const iv = b.slice(0, 12);
-    const tag = b.slice(12, 28);
-    const encrypted = b.slice(28);
-    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
-    decipher.setAuthTag(tag);
-    const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
-    return decrypted.toString("utf8");
+    if (data === null || data === undefined) {
+        return data;
+    }
+    
+    try {
+        const b = Buffer.from(data, "base64");
+        
+        // Check if the buffer is long enough for IV + tag + encrypted data
+        if (b.length < 28) {
+            console.warn('Encrypted data too short, returning as-is');
+            return data;
+        }
+        
+        const iv = b.slice(0, 12);
+        const tag = b.slice(12, 28);
+        const encrypted = b.slice(28);
+        const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+        decipher.setAuthTag(tag);
+        const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+        return decrypted.toString("utf8");
+    } catch (error) {
+        console.warn('Decryption failed, returning original data:', error.message);
+        return data; // Return original data if decryption fails
+    }
 }
